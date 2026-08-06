@@ -14,11 +14,13 @@ const HeroButtons = () => {
         flexWrap="wrap"
       >
         <Button
-          size="lg"
-        >
-          Download Resume
-        </Button>
-
+  as="a"
+  href="/resume/Shimaa_Ahmed_Resume.pdf"
+  download="Shimaa_Ahmed_Resume.pdf"
+  size="lg"
+>
+  Download Resume
+</Button>
         <Button
           as={HashLink}
           smooth

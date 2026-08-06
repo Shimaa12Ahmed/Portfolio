@@ -2,7 +2,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
 import { lazy, Suspense } from "react";
-import Nav from"./Components/Nav/nav";
+import Nav from"./Components/Nav/Nav";
 import HeroSection from "./Sections/HeroSection";
 
 
