@@ -30,4 +30,22 @@ export const experienceData = [
       "Improved communication and collaboration with international clients.",
     ],
   },
+  {
+    id: 3,
+    title: "Frontend Development Trainee – Digitera Bootcamp",
+
+    company: "EraaSoft in collaboration with ICareer",
+
+    duration: "September 12, 2026 – September 25, 2026",
+
+    responsibilities: [
+      "Completed an intensive Frontend Development bootcamp consisting of 8 sessions covering technical and soft skills.",
+      "Practiced gathering and analyzing client requirements through virtual client interactions.",
+      "Learned to organize and manage development tasks using Jira.",
+      "Practiced translating Figma designs into frontend interfaces using VS Code.",
+      "Explored AI-assisted frontend development workflows using Next.js.",
+      "Explored WordPress, Salla, and Sanity as content management and e-commerce platforms.",
+      "Built a perfume e-commerce website and developed its dashboard using Sanity.",
+    ],
+  },
 ];

@@ -7,7 +7,6 @@ import Nav from"./Components/Nav/Nav";
 
 import HeroSection from "./Sections/HeroSection";
 
-
 const About = lazy(() => import("./Sections/About"));
 const Experience = lazy(() => import("./Sections/Experience"));
 const Projects = lazy(() => import("./Sections/Projects"));
@@ -31,11 +30,11 @@ function App() {
  
   return (
     <> 
-    <Suspense fallback={<LoadingPage />}>
+   
     <Nav/>
   <HeroSection />
    
-  
+   <Suspense fallback={<LoadingPage />}>
   <About />
   <Experience />
   <Projects />

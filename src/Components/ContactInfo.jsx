@@ -11,14 +11,22 @@ import {
 import {
   MdEmail,
   MdLocationOn,
+
 } from "react-icons/md";
 
+import { IoLogoWhatsapp } from "react-icons/io";
 import {
   FaGithub,
   FaLinkedin,
 } from "react-icons/fa";
 
 const ContactInfo = () => {
+const WHATSAPP_NUMBER="201118256116";
+const WHATSAPP_MESSAGE=encodeURIComponent(
+  "Hello! I would like to contact you."
+);
+const WHATSAPP_URL =
+  `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`;
   return (
     <Card h="fit-content">
       <CardBody>
@@ -50,7 +58,15 @@ const ContactInfo = () => {
               LinkedIn
             </Link>
           </HStack>
-
+<HStack>
+            <Icon as={IoLogoWhatsapp } color="brand.600" />
+            <Link
+  href={WHATSAPP_URL}
+  isExternal
+>
+  01118256116
+</Link>
+          </HStack>
           <HStack>
             <Icon as={MdLocationOn} color="brand.600" />
             <Text>Egypt</Text>
