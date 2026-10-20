@@ -1,5 +1,5 @@
 import { fadeUp } from "../theme/animation";
-import { skillsData } from "../Data/skills";
+import { skillsData } from "../Data/Skills";
 import{ chakra, Box, Heading } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import SkillsCard from "../Components/Cards/SkillsCard";
