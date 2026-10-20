@@ -1,13 +1,5 @@
 
 import {
-  IoHeartOutline,
-  IoHeartDislikeOutline,
-  IoHeart,
-  IoHeartDislike,
-} from "react-icons/io5";
-
-
-import {
   Box,
   Heading,
   HStack,
@@ -18,20 +10,32 @@ import {
   Stack,
   Button,
   Divider,
-  IconButton,
   Image,
-  Tooltip,
   SimpleGrid,
 } from "@chakra-ui/react";
-
-
-import { Projects } from "../../Data/Projects";
-
-
 import { useProjects } from "../../Hooks/useProjects";
-
+import { ReactionsButtons } from "../Buttons/ReactionsButtons";
+import useProjectReactions from "../../Hooks/useProjectReactions";
 const ProjectsCard = () => {
-  const { projects, toggleLike, toggleDislike } = useProjects();
+  const { projects} = useProjects();
+const {
+  reactions,
+  loading: reactionsLoading,
+  error: reactionsError,
+  vote,
+} = useProjectReactions();
+
+  if (reactionsLoading) {
+    return <Text>Loading reactions...</Text>;
+  }
+
+  if (reactionsError) {
+    return (
+      <Text>
+        Failed to load reactions: {reactionsError}
+      </Text>
+    );
+  }
 
   return (
 
@@ -39,7 +43,20 @@ const ProjectsCard = () => {
         columns={{ base: 1, md: 2, lg: 3 }}
         spacing={8}
       >
-        {projects.map((project) => (
+     {projects.map((project) => {
+  const reaction = reactions.find(
+    (item) => item.project_id === project.id
+  );
+
+  const projectWithReactions = {
+    ...project,
+    likes: reaction?.likes ?? 0,
+    dislikes: reaction?.dislikes ?? 0,
+    liked: reaction?.user_reaction === "like",
+    disliked: reaction?.user_reaction === "dislike",
+  };
+  
+return(
           <Card key={project.id}>
             <CardBody>
               <Box
@@ -121,82 +138,15 @@ const ProjectsCard = () => {
               justify="center"
               gap={10}
             >
-              <HStack spacing={1}>
-                <Tooltip label="Like">
-                  <IconButton
-                    variant="unstyled"
-                    aria-label="Like"
-                    fontSize="2xl"
-                    color={
-                      project.liked
-                        ? "red.500"
-                        : "gray.400"
-                    }
-                    _hover={{
-                      color: "red.500",
-                      transform: "scale(1.15)",
-                    }}
-                    transition="all .2s"
-                    icon={
-                      project.liked ? (
-                        <IoHeart />
-                      ) : (
-                        <IoHeartOutline />
-                      )
-                    }
-                    onClick={() =>
-                      toggleLike(project.id)
-                    }
-                  />
-                </Tooltip>
+           <ReactionsButtons
+  project={projectWithReactions}
+  onVote={vote}
+/>
 
-                <Text
-                  fontSize="sm"
-                  fontWeight="medium"
-                >
-                  {project.likes}
-                </Text>
-              </HStack>
-
-              <HStack spacing={1}>
-                <Tooltip label="Dislike">
-                  <IconButton
-                    variant="unstyled"
-                    aria-label="Dislike"
-                    fontSize="2xl"
-                    color={
-                      project.disliked
-                        ? "red.500"
-                        : "gray.400"
-                    }
-                    _hover={{
-                      color: "red.500",
-                      transform: "scale(1.15)",
-                    }}
-                    transition="all .2s"
-                    icon={
-                      project.disliked ? (
-                        <IoHeartDislike />
-                      ) : (
-                        <IoHeartDislikeOutline />
-                      )
-                    }
-                    onClick={() =>
-                      toggleDislike(project.id)
-                    }
-                  />
-                </Tooltip>
-
-                <Text
-                  fontSize="sm"
-                  fontWeight="medium"
-                >
-                  {project.dislikes}
-                </Text>
-              </HStack>
             </CardFooter>
           </Card>
-        ))}
+        )})}
+        
       </SimpleGrid>
  
   );

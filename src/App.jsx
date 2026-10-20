@@ -33,7 +33,7 @@ function App() {
    
     <Nav/>
   <HeroSection />
-   
+ 
    <Suspense fallback={<LoadingPage />}>
   <About />
   <Experience />
